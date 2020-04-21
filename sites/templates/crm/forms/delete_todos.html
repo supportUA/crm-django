@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+ {% block title %}<title>Удалить задачу?</title>{% endblock %}
+{% block content %}
+<div class="content delete-page" >
+<h3>Вы уверены что хотите удалить из базы задачу "{{item}}" ?</h3>
+    <form action="{% url 'delete_todos' item.id %}" method="post">
+        {% csrf_token %}
+        <a href="/todos/" class="btn btn-success">Отменить</a>
+        <button type="submit" class="btn btn-danger">Удалить</button>
+    </form>
+</div>
+{% endblock %}

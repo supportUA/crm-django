@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% block title %}<title>CRM - Главная страница</title>{% endblock %}
+    <!-- Bootstrap CSS -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+      <style>
+          body {
+              background: #f5f5f5;
+              font-family: 'Roboto', Sans-Serif;
+             font-sie: 14px;
+          }
+          .table td, .table th {
+          font-size: 15px;
+          vertical-align: middle;
+          padding: 5px 10px;
+          }
+          a:focus {
+              outline: none;
+          }
+          .content {
+              background: #ffffff;
+              padding: 4px;
+              border-radius: .25rem;
+              margin-top: 20px;
+          }
+          .delete-page {
+              text-align: center;
+              padding: 60px 20px;
+          }
+          h2 {
+              padding: 20px 0;
+              font-width: bold;
+              text-align: center;
+              font-family: 'Roboto Condensed', Sans-Serif;
+              text-transform: uppercase;
+          }
+          .card {
+              text-align: center;
+              margin: 20px 0;
+          }
+          .green {
+              color: green;
+          }
+          h1 {
+              padding: 10px 0;
+              font-family: 'Roboto Condensed', Sans-Serif;
+          }
+          .right_btn {
+              float: right;
+              right: 10px;
+              position: absolute;
+              margin-top: -60px;
+              margin-right: 20px
+          }
+          th {
+          font-size: 14px}
+          td {
+              min-height: 56px;
+          }
+          .content form {
+              padding: 20px;
+          }
+         .content input {
+              display: block;
+              width: 100%;
+              max-width: 350px;
+              height: 45px;
+              border-radius: 4px;
+              border: 1px solid #ddd;
+              padding: 4px 10px;
+              margin-bottom: 10px;
+          }
+         .content label {
+             display: block;
+         }
+         .content input[type=checkbox] {
+             display: inline-block;
+             width: auto;
+             position: absolute;
+             margin-top: -41px;
+             margin-left: 190px;
+         }
+          .content textarea {
+              display: block;
+              width: 100%;
+              max-width: 550px;
+              height: 245px;
+              border-radius: 4px;
+              border: 1px solid #ddd;
+              padding: 4px 10px;
+              margin-bottom: 10px;
+          }
+         .content select {
+              display: block;
+              width: 100%;
+              max-width: 350px;
+              height: 45px;
+              border-radius: 4px;
+              border: 1px solid #ddd;
+              padding: 4px 10px;
+              margin-bottom: 10px;
+          }
+          .card-body {
+              padding: 5px;
+          }
+          .card-title {
+            margin-bottom: 0;
+            line-height: 1;
+        }
+        .all-center {
+            text-align: center;
+        }
+        .info_client {
+        background-color: #f5f5f5;
+        padding: 15px;
+        margin: 20px 10px;
+        font-style: italic
+        }
+        .todo_done {
+        text-decoration: line-through;
+        opacity: 0.5;
+        }
+        .s-12 {
+        font-size: 12px}
+        .todo_name {
+            font-size: 18px;
+            line-height: 1.3;
+            padding-left: 20px;
+            display: block;
+            border-bottom: 1px solid #eee;
+        }
+        .status {
+            border-radius: 3px;
+            box-sizing: border-box;
+            display: block;
+            float: left;
+            font-weight: 600;
+            height: 32px;
+            line-height: 32px;
+            margin: 0 4px 4px 0;
+            min-width: 40px;
+            padding: 0 12px;
+            color: #fff;
+            min-width: 132px;
+            text-align: center;
+        }
+
+      </style>
+  </head>
+  <body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="/">CRM</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+         <li class="nav-item">
+        <a class="nav-link" href="{% url 'index' %}">Главная</a>
+      </li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'clients_list' %}">Клиенты</a></li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'projects_list' %}">Проекты</a>
+      </li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'sites_list' %}">Сайты</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'todos_list' %}">Задачи</a></li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Поиск по всему" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Найти</button>
+    </form>
+  </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script>
+    $('#navbarSupportedContent a').each(function () { // пробегаем по ссылкам меню
+var location = window.location.href; // задаем в переменную адрес страницы
+var link = this.href; // задаем в переменную адрес из ссылки
+var result = location.match(link); // заносим в переменную результат сравнения переменных, результат = null, если совпадений нет
+if(result != null) { // если результат не равен null
+$(this).parent().addClass('active').siblings().removeClass('active'); // то добавляем класс .active родителю и убираем его у соседей
+}
+});
+</script>
+  </body>
+</html>

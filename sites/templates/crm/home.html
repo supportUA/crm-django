@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row">
+     <div class="col-md-3">
+        <div class="card text-white bg-secondary mb-3">
+          <div class="card-header">Клиенты</div>
+          <div class="card-body">
+            <h1 class="card-title">{{ all_clients }}</h1>
+          </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-dark mb-3">
+          <div class="card-header">Проекты</div>
+          <div class="card-body">
+            <h1 class="card-title">{{ all_project }}</h1>
+          </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-success mb-3">
+         <div class="card-header">Сайты</div>
+          <div class="card-body">
+            <h1 class="card-title">{{ all_sites }}</h1>
+          </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-info mb-3">
+          <div class="card-header">Задачи</div>
+          <div class="card-body">
+            <h1 class="card-title">{{ all_todo }}</h1>
+          </div>
+        </div>
+    </div>
+    </div>
+<div class="row">
+<div class="col-md-6">
+<div class="content">
+<h2>Последние 3 клиента</h2>
+ <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Имя</th>
+      <th  class="text-center">Телефон</th>
+      <th class="text-center"></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for client in clients %}
+    <tr>
+      <td>{{ client.name }}</td>
+      <td class="text-center">{{ client.phone }}</td>
+      <td class="text-center"><a href="{% url 'client_detail' client.id %}" class="btn btn-sm btn-success"><i class="fas fa-info-circle"></i></a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+ </div>
+<div class="col-md-6">
+    <div class="content">
+<h2>Последние 3 проекта</h2>
+  <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Название проекта</th>
+       <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for project in projects %}
+    <tr>
+      <td>{{ project.name }}</td>
+      <td><a href="{% url 'update_project'  project.id %}" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a></td>
+      <td><a href="{% url 'delete_project'  project.id %}" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a></td>
+     <td><a href="{% url 'project_detail' project.id %}" class="btn btn-sm btn-success"><i class="fas fa-info-circle"></i></a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+ </div>
+</div>
+    <div class="row">
+        <div class="col-md-12">
+    <div class="content">
+     <h2>Последние 10 задач</h2>
+ <table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Задача</th>
+      <th >Проект</th>
+      <th>Дата создания</th>
+      <th>Статус</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for todo in todos %}
+      {% if todo.done %}
+    <tr class="table-secondary todo_done">
+      <td>{{ todo.name|truncatewords:3|linebreaks }}</td>
+     <td><a href="/project/{{ todo.project_todo.id }}/">{{ todo.project_todo }}</a></td>
+      <td>{{ todo.created_date }}</td>
+      <td><span class="status" style="background:{{ todo.status.color }};">{{ todo.status.name }}</span></td>
+      <td><a href="{% url 'update_todos' todo.id %}" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a></td>
+      <td><a href="{% url 'delete_todos' todo.id %}" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a></td>
+        <td><a href="{% url 'todo_detail' todo.id %}" class="btn btn-sm btn-success"><i class="fas fa-info-circle"></i></a></td>
+    </tr>
+      {% else %}
+     <tr>
+      <td>{{ todo.name|truncatewords:3|linebreaks }}</td>
+      <td><a href="/project/{{ todo.project_todo.id }}/">{{ todo.project_todo }}</a></td>
+      <td>{{ todo.created_date }}</td>
+      <td><span class="status" style="background:{{ todo.status.color }};">{{ todo.status.name }}</span></td>
+      <td><a href="{% url 'update_todos' todo.id %}" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a></td>
+      <td><a href="{% url 'delete_todos' todo.id %}" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a></td>
+         <td><a href="{% url 'todo_detail' todo.id %}" class="btn btn-sm btn-success"><i class="fas fa-info-circle"></i></a></td>
+    </tr>
+      {% endif %}
+  {% endfor %}
+  </tbody>
+</table>
+        </div>
+    </div>
+      <div class="col-md-12">
+        <div class="content">
+  <h2>Последние 3 сайта</h2>
+ <table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Ссылка</th>
+      <th>Проект</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for site in sites %}
+    <tr>
+      <td><a href="{{ site.name }}" target="_blank">{{ site.name }}</a></td>
+      <td><a href="/project/{{ site.main_project.id }}/">{{ site.main_project }}</a></td>
+      <td><a href="{% url 'update_site' site.id %}" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a></td>
+      <td><a href="{% url 'delete_site' site.id %}" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a></td>
+     <td><a href="{% url 'site_detail' site.id %}" class="btn btn-sm btn-success"><i class="fas fa-info-circle"></i></a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+        </div>
+    </div>
+
+    </div>
+
+
+{% endblock %}

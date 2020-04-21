@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+ {% block title %}<title>Задачи</title>{% endblock %}
+{% block content %}
+    <div class="content">
+     <h1>Задачи</h1>
+     <a href="{% url 'create_todos' %}" class="btn btn-info right_btn">Добавить задачу</a>
+ <table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Задача</th>
+      <th >Проект</th>
+      <th>Дата создания</th>
+      <th>Статус</th>
+      <th>Выполненно?</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for todo in todos %}
+      {% if todo.done %}
+    <tr class="table-secondary todo_done">
+      <td>{{ todo.name }}</td>
+      <td><a href="/project/{{ todo.project_todo.id }}/" class="s-12">{{ todo.project_todo }}</a></td>
+      <td class="s-12">{{ todo.created_date }}</td>
+      <td><span class="status" style="background:{{ todo.status.color }};">{{ todo.status.name }}</span></td>
+      <td><a href="{% url 'todos_on' todo.id %}" style="color: red">Да</a></td>
+      <td><a href="{% url 'update_todos' todo.id %}" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a></td>
+      <td><a href="{% url 'delete_todos' todo.id %}" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a></td>
+      <td><a href="{% url 'todo_detail' todo.id %}" class="btn btn-sm btn-success"><i class="fas fa-info-circle"></i></a></td>
+    </tr>
+      {% else %}
+     <tr>
+      <td>{{ todo.name }}</td>
+      <td><a href="/project/{{ todo.project_todo.id }}/" class="s-12">{{ todo.project_todo }}</a></td>
+      <td class="s-12">{{ todo.created_date }}</td>
+      <td><span class="status" style="background:{{ todo.status.color }};">{{ todo.status.name }}</span></td>
+      <td><a href="{% url 'todos_off' todo.id %}" style="color: green">Нет</a></td>
+      <td><a href="{% url 'update_todos' todo.id %}" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a></td>
+      <td><a href="{% url 'delete_todos' todo.id %}" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a></td>
+      <td><a href="{% url 'todo_detail' todo.id %}" class="btn btn-sm btn-success"><i class="fas fa-info-circle"></i></a></td>
+    </tr>
+      {% endif %}
+  {% endfor %}
+  </tbody>
+</table>
+    </div>
+{% endblock %}
